@@ -28,27 +28,20 @@ public class UserComponentImpl implements UserComponent{
 
     @Override
     public User findByIdOrDie(Long id) {
-        User user = new User();
-        try {
-            user = findById(id)
-                    .orElseThrow(() -> new Exception("user with this id not found !"));
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        user.setPassword(PasswordUtils.decrypt(user.getPassword()));
-        return user;
+        return findById(id)
+                    .orElseThrow(() -> new RuntimeException("user with this id not found !"));
     }
 
     @Override
-    public User commit(UserRequest request) throws Exception {
-        if(repo.checkUserExistByName(request.getUsername())>0) throw new Exception("user with such name is exist");
+    public User commit(UserRequest request) {
+        if(repo.checkUserExistByName(request.getUsername())>0) throw new RuntimeException("user with such name is exist");
 
         User user = new User();
         user.setUsername(request.getUsername());
 
         user.setPassword(PasswordUtils.encrypt(request.getPassword()));
         if(!checkValidEmail(request.getEmail())){
-            throw new Exception("Email is not valid !");
+            throw new RuntimeException("Email is not valid !");
         }
         user.setEmail(request.getEmail());
         LocalDateTime date = LocalDateTime.now();

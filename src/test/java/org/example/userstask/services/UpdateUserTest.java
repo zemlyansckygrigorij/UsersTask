@@ -37,7 +37,7 @@ public class UpdateUserTest {
     }
 
     @Test
-    void updateUserById() throws Exception {
+    void updateUserById() {
 
         UserRequest requestUpdate = new UserRequest();
         requestUpdate.setEmail(testValues.testUpdateEmail);

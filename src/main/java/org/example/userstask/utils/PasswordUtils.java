@@ -4,7 +4,6 @@ import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
-
 public class PasswordUtils {
     private static byte[] encrypted;
     private static String encryptedtext;
