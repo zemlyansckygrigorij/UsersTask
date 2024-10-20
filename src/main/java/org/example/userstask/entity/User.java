@@ -33,12 +33,23 @@ public class User {
     private String password;
 
     @Column(name = "created", nullable = false)
-  //  @Temporal(TemporalType.DATE)
     private LocalDateTime createdAt;
 
     @Column(name = "updated", nullable = false)
-  //  @Temporal(TemporalType.DATE)
     private LocalDateTime updatedAt;
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj==null) return false;
+        if(obj.getClass()!=this.getClass()) return false;
+        if(((User) obj).getId()!=this.getId()) return false;
+        if(((User) obj).username!=this.username) return false;
+        return true;
+    }
+    @Override
+    public int hashCode() {
+        return (this.getId()+this.username).hashCode();
+    }
 }
 
 

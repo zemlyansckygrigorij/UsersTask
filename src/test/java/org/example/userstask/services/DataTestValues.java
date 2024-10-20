@@ -25,6 +25,16 @@ public class DataTestValues {
     public String testUpdateEmail;
     @Value("${test.update.pasword}")
     public String testUpdatePassword;
+
+    @Value("${test.name.new}")
+    public String testNameNew;
+    @Value("${test.email.new}")
+    public String testEmailNew;
+    @Value("${test.created}")
+    public String testCreatedAt;
+    @Value("${test.updated}")
+    public String testUpdatedAt;
+
     public static final String testUser = """
            {
                "username":"Test",
@@ -32,6 +42,7 @@ public class DataTestValues {
                "password":"testPassword"
            }
     """;
+
     public static final String testUserUpdate = """
            {
                "username":"Testupdate",

@@ -48,13 +48,13 @@ public class WebLogger {
         logger.info(jp.toShortString() +  args +" time-" +time.getHour()+":"+time.getMinute());
     }
 
-
     @AfterReturning(
             pointcut = "findByIdOrDie()",
             returning = "result")
     public void findByIdOrDie(UserResponse result) {
         logger.info("findUserById - "+result.toString());
     }
+
     @AfterReturning(
             pointcut = "commit()",
             returning = "result")
