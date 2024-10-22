@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Validated
 @Tag(name = "API работы с пользователями",
         description = "Api work users")
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserComponent component;

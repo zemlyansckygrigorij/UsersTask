@@ -40,7 +40,7 @@ class UserControllerTest {
     @Test
     void findByIdOrDie()  {
         try {
-                this.mockMvc.perform(get("http://localhost:" + port + "/users/1" ))
+                this.mockMvc.perform(get("http://localhost:" + port + "/api/users/1" ))
                         .andDo(print())
                         .andExpect(status().isOk())
                         .andExpect(jsonPath("$.username", is(testValues.testNameNew)))
@@ -72,7 +72,7 @@ class UserControllerTest {
     @Test
     void findAll() {
         try{
-            mockMvc.perform(get("http://localhost:" + port + "/users"))
+            mockMvc.perform(get("http://localhost:" + port + "/api/users"))
                 .andExpect(jsonPath("$", hasSize(1)));
         }catch(Exception e){
             e.printStackTrace();
@@ -82,20 +82,20 @@ class UserControllerTest {
     @Test
     void deleteUserById() {
         try{
-            mockMvc.perform(get("http://localhost:" + port + "/users"))
+            mockMvc.perform(get("http://localhost:" + port + "/api/users"))
                 .andExpect(jsonPath("$", hasSize(1)));
 
             long id = getIdCommitedUser();
 
-            mockMvc.perform(get("http://localhost:" + port + "/users"))
+            mockMvc.perform(get("http://localhost:" + port + "/api/users"))
                     .andExpect(jsonPath("$", hasSize(2)));
 
             this.mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/users/"+id)
+                        .delete("/api/users/"+id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-            mockMvc.perform(get("http://localhost:" + port + "/users"))
+            mockMvc.perform(get("http://localhost:" + port + "/api/users"))
                 .andExpect(jsonPath("$", hasSize(1)));
         }catch(Exception e){
             e.printStackTrace();
@@ -108,7 +108,7 @@ class UserControllerTest {
         long id = getIdCommitedUser();
         try{
             mockMvc.perform(MockMvcRequestBuilders
-                .put("http://localhost:" + port + "/users/"+id)
+                .put("http://localhost:" + port + "/api/users/"+id)
                 .content(testValues.testUserUpdate)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
@@ -132,7 +132,7 @@ class UserControllerTest {
         MvcResult result = null;
         try{
             result = mockMvc.perform(MockMvcRequestBuilders
-                            .post("/users")
+                            .post("/api/users")
                             .content(DataTestValues.testUser)
                             .contentType(MediaType.APPLICATION_JSON)
                             .accept(MediaType.APPLICATION_JSON))
